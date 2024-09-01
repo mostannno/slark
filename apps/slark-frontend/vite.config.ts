@@ -7,6 +7,17 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    // 在 outDir 中生成 .vite/manifest.json
+    manifest: true,
+    rollupOptions: {
+      // 覆盖默认的 .html 入口
+      input: '/src/main.tsx'
+    }
+  },
+  server: {
+    origin: 'http://localhost:5173',
+  },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
