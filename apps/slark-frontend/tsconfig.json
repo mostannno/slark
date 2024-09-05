@@ -7,14 +7,12 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "Components": ["./src/Components"],
-      "Widgets": ["./src/Widgets"],
+      "widgets": ["./src/widgets"],
       "assets": ["./src/assets"],
-      "utils/*": ["./src/utils/*"],
+      "shared/*": ["./src/shared/*"],
       "store/*": ["./src/store/*"],
-      "model/*": ["./src/model/*"],
+      "entities/*": ["./src/entities/*"],
       // "public/*": ["./src/public/*"],
-      "services/*": ["./src/services/*"],
     },
 
     /* Bundler mode */

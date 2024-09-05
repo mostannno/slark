@@ -1,11 +1,16 @@
 import { FC, useCallback, memo } from "react";
 import styled from "styled-components";
-import generateUUID from "utils/uuid";
-import { updateStore } from "store/todoStore";
+import generateUUID from "../../shared/uuid";
 import { Input } from "./Input";
-import { findPrevSibling, findLast, useListEntity } from "./connector";
-import { ListEntity } from "model/todo";
-import { TodoContainer } from "model/constants";
+import {
+  findPrevSibling,
+  findLast,
+  useListEntity,
+  ListEntity,
+  updateStore,
+  TodoContainer,
+} from "entities/list";
+
 import useStore from "store/commonStore";
 
 const ForwardDiv = styled.div`
@@ -44,27 +49,27 @@ const OriginList: FC<ListNodeProps> = ({ isContainer, id }) => {
         id: generateId,
         title: "",
         next: null,
-        parent: listNode.parent,
+        parent: listNode.parent!,
         pageId,
         child: null,
       };
       updateStore((state) => {
         if (shouldUsePrevOne) {
-          const prevSibling = findPrevSibling(listNode.id, state.entities);
-          console.log('entities', state.entities.TodoContainer.id);
+          const prevSibling = findPrevSibling(listNode.id!, state.entities);
+          console.log("entities", state.entities.TodoContainer!.id);
           if (prevSibling) {
             if (prevSibling.next) {
               const next = prevSibling.next;
               newNode.next = next;
             }
-            state.entities[prevSibling.id].next = generateId;
+            state.entities[prevSibling.id]!.next = generateId;
             state.entities[generateId] = newNode;
             state.focusNode = newNode.id;
           } else {
-            const root = state.entities[TodoContainer];
+            const root = state.entities[TodoContainer]!;
             if (root.child) {
-              console.log('update root', state.entities[root.child]);
-              state.entities[root.child].is_root = false;
+              console.log("update root", state.entities[root.child]);
+              state.entities[root.child]!.is_root = false;
               const next = root.child;
               newNode.next = next;
             }
@@ -78,7 +83,7 @@ const OriginList: FC<ListNodeProps> = ({ isContainer, id }) => {
             const next = listNode.next;
             newNode.next = next;
           }
-          state.entities[listNode.id].next = generateId;
+          state.entities[listNode.id!]!.next = generateId;
           state.entities[generateId] = newNode;
           state.focusNode = newNode.id;
         }
@@ -89,37 +94,37 @@ const OriginList: FC<ListNodeProps> = ({ isContainer, id }) => {
 
   const handleTab = useCallback(
     (withShift: boolean) => {
-      const parentId = listNode.parent;
+      const parentId = listNode.parent!;
       console.log("[Tab Event]", "withShift", withShift);
       if (withShift) {
         if (parentId === TodoContainer) return;
         updateStore((state) => {
-          const writableNode = state.entities[listNode.id];
-          const parent = state.entities[parentId];
-          const prevNode = findPrevSibling(listNode.id, state.entities);
+          const writableNode = state.entities[listNode.id!]!;
+          const parent = state.entities[parentId]!;
+          const prevNode = findPrevSibling(listNode.id!, state.entities);
           // 头节点
           if (!prevNode) {
             parent.child = listNode.next ? listNode.next : null;
           } else {
-            prevNode.next = listNode.next;
+            prevNode.next = listNode.next!;
           }
           writableNode.parent = parent.parent;
           writableNode.next = parent.next;
-          parent.next = listNode.id;
+          parent.next = listNode.id!;
         });
       } else {
         updateStore((state) => {
-          const writableNode = state.entities[listNode.id];
-          const prevNode = findPrevSibling(listNode.id, state.entities);
+          const writableNode = state.entities[listNode.id!]!;
+          const prevNode = findPrevSibling(listNode.id!, state.entities);
 
           if (prevNode) {
             if (prevNode.child) {
               const last = findLast(prevNode.child, state.entities);
-              last.next = listNode.id;
+              last.next = listNode.id!;
             } else {
-              prevNode.child = listNode.id;
+              prevNode.child = listNode.id!;
             }
-            prevNode.next = listNode.next;
+            prevNode.next = listNode.next!;
             writableNode.next = null;
             writableNode.parent = prevNode.id;
           }
@@ -133,7 +138,7 @@ const OriginList: FC<ListNodeProps> = ({ isContainer, id }) => {
     <>
       {!isContainer && (
         <Input
-          node={listNode}
+          node={listNode as any}
           handleTab={handleTab}
           handleEnter={handleEnter}
         />

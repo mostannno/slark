@@ -21,13 +21,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
-      "Components": path.resolve(__dirname, "src/Components"),
-      "Widgets": path.resolve(__dirname, "src/Widgets"),
-      "utils": path.resolve(__dirname, "src/utils"),
+      "widgets": path.resolve(__dirname, "src/widgets"),
+      "shared": path.resolve(__dirname, "src/shared"),
       "assets": path.resolve(__dirname, "src/assets"),
-      "model": path.resolve(__dirname, "src/model"),
       "store": path.resolve(__dirname, "src/store"),
-      "services": path.resolve(__dirname, "src/services"),
+      "entities": path.resolve(__dirname, "src/entities"),
     }
   }
 })

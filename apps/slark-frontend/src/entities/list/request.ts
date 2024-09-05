@@ -1,7 +1,7 @@
-import { jsonPost, sendRequest } from "./fetch";
-import { ListEntity } from "model/todo";
-import { TodoContainer } from "model/constants";
-import useStore from "store/todoStore";
+import { jsonPost } from "shared/fetch";
+import { ListEntity } from "./type";
+import { TodoContainer } from "./constants";
+import useStore from "./todoStore";
 
 function updateRealId(updates: ListEntity[] | string[]) {
   const entities = useStore.getState().entities;
@@ -13,12 +13,14 @@ function updateRealId(updates: ListEntity[] | string[]) {
   return ListEntities.map((k) => {
     const v = { ...k };
     v.id = v.real_id || v.id;
-    v.next = v.next ? entities[v.next].real_id || entities[v.next].id : v.next;
+    v.next = v.next
+      ? entities[v.next]!.real_id || entities[v.next]!.id
+      : v.next;
     v.parent = v.parent
-      ? entities[v.parent].real_id || entities[v.parent].id
+      ? entities[v.parent]!.real_id || entities[v.parent]!.id
       : v.parent;
     v.child = v.child
-      ? entities[v.child].real_id || entities[v.child].id
+      ? entities[v.child]!.real_id || entities[v.child]!.id
       : v.child;
     return v;
   });
@@ -36,7 +38,7 @@ function buildTodo(entities: BackEndEntity[]) {
     if (v.child) {
       let m: string | null = v.child;
       while (m) {
-        const e: BackEndEntity = entityMap[m!];
+        const e = entityMap[m] as BackEndEntity;
         child2ParentMap[m] = v.id;
         m = e.next;
       }
@@ -65,7 +67,10 @@ export async function update(updates: ListEntity[] | string[]) {
 
 export async function create(entity: ListEntity) {
   const { id, pageId, ...rest } = entity;
-  const result = await jsonPost<ListEntity>("/todo/create", { ...rest, page_id: pageId });
+  const result = await jsonPost<ListEntity>("/todo/create", {
+    ...rest,
+    page_id: pageId,
+  });
   return { id, result };
 }
 

@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { addPage } from "services/page";
+import { addPage } from "entities/page";
 import Add from './Icon';
 import { setCommonState } from "store/commonStore";
 

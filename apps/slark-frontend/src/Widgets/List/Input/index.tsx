@@ -6,10 +6,10 @@ import {
   findPrev,
   findNext,
   findPrevSibling,
-} from "../connector";
-import { updateStore } from "store/todoStore";
-import { ListEntity } from "model/todo";
-import { TodoContainer } from "model/constants";
+  updateStore,
+  ListEntity,
+  TodoContainer,
+} from "entities/list";
 
 export interface ItemProps {
   node: ListEntity & { isFocusing: boolean };
@@ -67,10 +67,13 @@ export function Input(props: ItemProps) {
       console.log(
         "[Key Event]",
         "Enter",
-        (e.nativeEvent.target as HTMLInputElement).selectionStart === 0,
+        (e.nativeEvent.target as HTMLInputElement).selectionStart === 0
       );
       e.preventDefault();
-      handleEnter(false, (e.nativeEvent.target as HTMLInputElement).selectionStart === 0);
+      handleEnter(
+        false,
+        (e.nativeEvent.target as HTMLInputElement).selectionStart === 0
+      );
     }
     if (e.keyCode === Command.Up) {
       console.log("[Key Event]", "Up");
@@ -95,10 +98,10 @@ export function Input(props: ItemProps) {
         console.log("[Key Event]", "Delete");
         e.preventDefault();
         updateStore((state) => {
-          const writableParent = state.entities[node.parent];
+          const writableParent = state.entities[node.parent]!;
           // 唯一节点不能被删除 有 child 的节点不能被 delete 删除
           if (
-            (state.entities[TodoContainer].child === node.id && !node.next) ||
+            (state.entities[TodoContainer]!.child === node.id && !node.next) ||
             node.child
           )
             return;

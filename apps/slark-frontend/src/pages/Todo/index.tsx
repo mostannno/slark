@@ -1,12 +1,9 @@
-import { List } from "Widgets";
+import { List } from "widgets";
 import styled from "styled-components";
-import { TodoContainer } from "model/constants";
-import { PageEntity } from "model/page";
+import { TodoContainer, getAllTodo, updateStore } from "entities/list";
+import { PageEntity, getAllPages } from "entities/page";
 import { useEffect } from "react";
-import { getAllTodo } from "services/todo";
-import { getAllPages } from "services/page";
 import Dir from "./Dir";
-import { updateStore } from "../../store/todoStore";
 import useCommonStore, { setCommonState } from "../../store/commonStore";
 
 const Container = styled.div`
@@ -28,7 +25,7 @@ function Todo() {
           });
           return {
             ...state,
-            currentPageId: allPages[0].id,
+            currentPageId: allPages[0]!.id,
             pages: allPages,
           };
         });
@@ -43,7 +40,7 @@ function Todo() {
           updateStore((state) => {
             todos.forEach((todo) => {
               if (todo.is_root) {
-                state.entities[TodoContainer].child = todo.id;
+                state.entities[TodoContainer]!.child = todo.id;
               }
               state.entities[todo.id] = todo;
             });

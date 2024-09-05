@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Input } from "antd";
 import styled from "styled-components";
 import DocIcon from "./docIcon";
-import { updatePage } from "services/page";
+import { updatePage } from "entities/page";
 import { Memu } from "../Memu";
 import { setCommonState } from "store/commonStore";
 
@@ -82,7 +82,7 @@ const DocumentItem: React.FC<{
         setCommonState((store) => {
           const { pages } = store;
           const targetIndex = pages.findIndex((v) => v.id === id);
-          const target = pages[targetIndex];
+          const target = pages[targetIndex]!;
           const newPages = [...pages];
           newPages.splice(targetIndex, 1, {
             ...target,

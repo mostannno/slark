@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { shallow } from "zustand/shallow";
 import { Draft, produce } from "immer";
-import { ListEntity } from "model/todo";
-import { TodoContainer } from "model/constants";
-import { update, create as createTodo, remove } from "services/todo";
-import { getCommonState } from "./commonStore";
+import { ListEntity } from "./type";
+import { TodoContainer } from "./constants";
+import { update, create as createTodo, remove } from "./request";
+import { getCommonState } from "../../store/commonStore";
 
 interface TodoStore {
   entities: Record<string, ListEntity>;

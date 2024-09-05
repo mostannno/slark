@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { useCallback, useMemo } from "react";
-import { deletePage } from "services/page";
+import { deletePage } from "entities/page";
 import { setCommonState } from "store/commonStore";
 
 const Dot = styled.div`
@@ -41,7 +41,7 @@ export function Memu(props: MemuProps) {
   const { id, handleRename } = props;
   const handleClick = useCallback(
     (key: string) => {
-      console.log('key=', key);
+      console.log("key=", key);
       if (key === "0") {
         deletePage(id);
         setCommonState((state) => {

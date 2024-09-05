@@ -1,4 +1,4 @@
-import Todo from './pages/Todo'
+import Todo from '../pages/todo'
 import { enablePatches } from "immer";
 import './App.css';
 

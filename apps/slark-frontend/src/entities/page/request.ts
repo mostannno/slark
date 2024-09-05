@@ -1,5 +1,5 @@
-import { sendRequest, jsonPost } from "./fetch";
-import { PageEntity } from "model/page";
+import { sendRequest, jsonPost } from "shared/fetch";
+import { PageEntity } from "./type";
 
 export async function getAllPages() {
   const result = await sendRequest<PageEntity[]>("/page/queryAll");
