@@ -11,7 +11,7 @@ import {
   TodoContainer,
 } from "entities/list";
 
-import useStore from "store/commonStore";
+import useStore from "entities/page/store";
 
 const ForwardDiv = styled.div`
   margin-left: 20px;

@@ -2,11 +2,12 @@ import styled from "styled-components";
 import DocumentItem from "./Components/DocumentItem";
 import NewItem from "./Components/NewItem";
 import { useCallback, useEffect, useState } from "react";
-import useCommonStore from "store/commonStore";
+import useCommonStore from "entities/page/store";
 
 const Container = styled.div`
   width: 280px;
   height: 100%;
+  padding: 20px;
 `;
 
 function Dir() {
@@ -21,7 +22,7 @@ function Dir() {
   useEffect(() => {
     if (!selectedId) {
       const firstPageId = pages[0]?.id;
-      setSelectedId(firstPageId);
+      firstPageId && setSelectedId(firstPageId);
     }
   }, [pages]);
   return (

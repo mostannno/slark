@@ -41,7 +41,7 @@ class Page {
   @catchAndLog
   async query(id: number) {
     const result = await this.pool.query<PageInterface>(
-      `SELECT id FROM todo."page" WHERE id = ${id}`,
+      `SELECT * FROM todo."page" WHERE id = ${id}`,
     );
     const { rows } = result;
     return rows;

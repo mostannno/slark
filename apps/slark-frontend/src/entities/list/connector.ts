@@ -1,4 +1,4 @@
-import useStore, { updateStore } from "./todoStore";
+import useStore, { updateStore } from "./store";
 import { shallow } from "zustand/shallow";
 import { ListEntity } from "./type";
 import { TodoContainer } from './constants';

@@ -1,12 +1,12 @@
 import { addPage } from "entities/page";
 import Add from './Icon';
-import { setCommonState } from "store/commonStore";
+import { setPageState } from "entities/page/store";
 
 const NewItem = () => {
   const handleClick = async () => {
     const newPage = await addPage();
     if (newPage) {
-      setCommonState(state => ({
+      setPageState(state => ({
         ...state,
         pages: [...state.pages, newPage]
       }))

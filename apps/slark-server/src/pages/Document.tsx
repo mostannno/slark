@@ -1,4 +1,3 @@
-// import Document from '../../../slark-frontend/src/pages/document';
 import React from "react";
 import Script from "next/script";
 
@@ -23,7 +22,6 @@ const Index = () => (
       }}
       id="vite-refresh"
     />
-    {/* <Document /> */}
   </>
 );
 

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import DocIcon from "./docIcon";
 import { updatePage } from "entities/page";
 import { Memu } from "../Memu";
-import { setCommonState } from "store/commonStore";
+import { setPageState } from "entities/page/store";
 
 const Container = styled.div<{ selected?: boolean }>`
   display: flex;
@@ -79,7 +79,7 @@ const DocumentItem: React.FC<{
   const handleConfirm = () => {
     if (value) {
       updatePage([{ id, title: value }]).then(() => {
-        setCommonState((store) => {
+        setPageState((store) => {
           const { pages } = store;
           const targetIndex = pages.findIndex((v) => v.id === id);
           const target = pages[targetIndex]!;

@@ -26,6 +26,10 @@ export class PageService {
     return this.storeService.page.queryAll();
   }
 
+  query(page_id: number) {
+    return this.storeService.page.query(page_id);
+  }
+
   findMaxOrder() {
     return this.storeService.page.findMaxOrder();
   }

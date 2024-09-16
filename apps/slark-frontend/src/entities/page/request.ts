@@ -11,12 +11,22 @@ export async function addPage() {
   return "error" in result ? null : result;
 }
 
+export async function getPageById(pageId: string) {
+  const result = await jsonPost<PageEntity>("/page/getPageById", {
+    page_id: pageId,
+  });
+  if (result && "error" in result) {
+    throw "update page failed";
+  }
+  return result;
+}
+
 export async function updatePage(
   pages: ({ id: string } & Partial<Omit<PageEntity, "id">>)[]
 ) {
   const result = await jsonPost<PageEntity>("/page/update", pages);
-  if (result && "error" in result ) {
-    throw 'update page failed';
+  if (result && "error" in result) {
+    throw "update page failed";
   }
 }
 

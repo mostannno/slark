@@ -3,7 +3,7 @@ import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { useCallback, useMemo } from "react";
 import { deletePage } from "entities/page";
-import { setCommonState } from "store/commonStore";
+import { setPageState } from "entities/page/store";
 
 const Dot = styled.div`
   background-color: #000;
@@ -39,12 +39,13 @@ interface MemuProps {
 
 export function Memu(props: MemuProps) {
   const { id, handleRename } = props;
+
   const handleClick = useCallback(
     (key: string) => {
       console.log("key=", key);
       if (key === "0") {
         deletePage(id);
-        setCommonState((state) => {
+        setPageState((state) => {
           const { pages } = state;
           const target = pages.findIndex((v) => v.id === id);
           if (target >= 0) {
@@ -58,6 +59,9 @@ export function Memu(props: MemuProps) {
       }
       if (key === "1") {
         handleRename?.(id);
+      }
+      if (key === "2") {
+        window.open(`/document/${id}`);
       }
     },
     [id]
@@ -74,6 +78,13 @@ export function Memu(props: MemuProps) {
       {
         label: "重命名",
         key: "1",
+        onClick: ({ key }) => {
+          handleClick(key);
+        },
+      },
+      {
+        label: "分享文档",
+        key: "2",
         onClick: ({ key }) => {
           handleClick(key);
         },

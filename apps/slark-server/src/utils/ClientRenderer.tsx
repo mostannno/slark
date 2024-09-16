@@ -2,7 +2,7 @@
 import React from "react";
 import Script from "next/script";
 
-const Index = () => (
+const ClientRenderer = () => (
   <>
     <Script
       type="module"
@@ -23,8 +23,7 @@ const Index = () => (
       }}
       id="vite-refresh"
     />
-    {/* <Document /> */}
   </>
 );
 
-export default Index;
+export default ClientRenderer;

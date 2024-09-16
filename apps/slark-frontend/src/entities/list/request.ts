@@ -1,7 +1,7 @@
 import { jsonPost } from "shared/fetch";
 import { ListEntity } from "./type";
 import { TodoContainer } from "./constants";
-import useStore from "./todoStore";
+import useStore from "./store";
 
 function updateRealId(updates: ListEntity[] | string[]) {
   const entities = useStore.getState().entities;

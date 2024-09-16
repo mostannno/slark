@@ -4,7 +4,7 @@ import { Draft, produce } from "immer";
 import { ListEntity } from "./type";
 import { TodoContainer } from "./constants";
 import { update, create as createTodo, remove } from "./request";
-import { getCommonState } from "../../store/commonStore";
+import { getPageState } from "../page/store";
 
 interface TodoStore {
   entities: Record<string, ListEntity>;
@@ -25,10 +25,8 @@ const useStore = create<TodoStore>(() => ({
   focusNode: "",
 }));
 
-(window as any).listStore = useStore;
-
 async function applyAddPatches(patches: ListEntity) {
-  const { currentPageId } = getCommonState();
+  const { currentPageId } = getPageState();
 
   const { id, result } = await createTodo({
     ...patches,
@@ -37,7 +35,7 @@ async function applyAddPatches(patches: ListEntity) {
 
   if (!("error" in result)) {
     updateStore((updateState) => {
-      updateState.entities[id].real_id = result.id;
+      updateState.entities[id]!.real_id = result.id;
     });
   }
 }
@@ -82,7 +80,12 @@ export const updateStore = (
     const updateIds: Record<string, any> = [];
     patches.forEach(({ op, value, path }) => {
       const [target, key, prop] = path as string[];
-      if (target !== "entities" || key === TodoContainer || key === "focusNode")
+      if (
+        !key ||
+        target !== "entities" ||
+        key === TodoContainer ||
+        key === "focusNode"
+      )
         return;
       if (op === "add") {
         if (originEntities[key]) return;
@@ -90,7 +93,7 @@ export const updateStore = (
         return;
       }
       if (op === "remove") {
-        const id = originEntities[key].real_id || key;
+        const id = originEntities[key]!.real_id || key;
         removes.push(id);
         return;
       }
@@ -99,7 +102,7 @@ export const updateStore = (
         if (!prop) {
           updateEntities.push({ ...value });
         } else if (prop === "next" || prop === "child") {
-          updateIds.push(state[target][key].id);
+          updateIds.push(state[target][key]!.id);
           // test[]
         }
         return;

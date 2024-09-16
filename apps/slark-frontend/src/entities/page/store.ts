@@ -15,11 +15,12 @@ const useStore = create<CommonStore>(() => ({
   pages: [],
 }));
 
-const { setState: setCommonState, getState: getCommonState } = useStore;
+const { setState: setPageState, getState: getPageState } = useStore;
 
-export {
-  setCommonState,
-  getCommonState
-}
+const initStore = (state: CommonStore) => {
+  setPageState({ ...state });
+};
+
+export { setPageState, getPageState };
 
 export default useStore;

@@ -67,6 +67,18 @@ export class PageContoller {
     await this.appService.batchDelete(ids.map((v) => parseInt(v, 10)));
   }
 
+  @Post('/getPageById')
+  async query(@Body() body: { page_id: string }) {
+    const { page_id } = body;
+    if (!page_id) {
+      throw new HttpException('param error', HttpStatus.BAD_REQUEST);
+    }
+    // todo @miao.tan Long int
+    const result = await this.appService.query(parseInt(page_id, 10));
+    console.log(result);
+    return result?.[0];
+  }
+
   @Get('/queryAll')
   async queryAll() {
     const rows = await this.appService.queryAll();
