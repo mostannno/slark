@@ -2,7 +2,7 @@
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "module": "commonjs",
+    "module": "NodeNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -28,7 +28,7 @@
     "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "plugins": [
@@ -41,7 +41,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "src/**/*",
   ],
   "exclude": [
     "node_modules"

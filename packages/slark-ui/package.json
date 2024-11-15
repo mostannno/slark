@@ -1,28 +1,49 @@
 {
   "name": "@slark/ui",
   "version": "0.0.0",
-  "private": true,
-  "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
-  },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component"
+    "generate:component": "turbo gen react-component",
+    "build": "npx tsc"
+  },
+  "exports": {
+    "./entities/list": {
+      "import": "./es/entities/list/index.js",
+      "require": "./es/entities/list/index.js",
+      "types": "./es/entitties/list/index.d.ts"
+    },
+    "./entities/page": {
+      "import": "./es/entities/page/index.js",
+      "require": "./es/entities/page/index.js",
+      "types": "./es/entitties/page/index.d.ts"
+    },
+    "./widgets": {
+      "import": "./es/widgets/index.js",
+      "require": "./es/widgets/index.js",
+      "types": "./es/widgets/index.d.ts"
+    }
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@turbo/gen": "^1.12.4",
-    "@types/node": "^20.11.24",
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/eslint": "^8.56.5",
+    "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
+    "@types/uuid": "^9.0.8",
     "eslint": "^8.57.0",
+    "rollup": "^4.21.3",
+    "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "react": "^18.2.0"
+    "antd": "^5.17.0",
+    "immer": "^10.0.2",
+    "react": "^18.2.0",
+    "styled-components": "^6.0.7",
+    "uuid": "^9.0.0",
+    "zustand": "^4.4.1"
   }
 }

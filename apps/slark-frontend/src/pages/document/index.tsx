@@ -39,7 +39,7 @@ function Document() {
           updateStore((state) => {
             todos.forEach((todo) => {
               if (todo.is_root) {
-                state.entities[TodoContainer].child = todo.id;
+                state.entities[TodoContainer]!.child = todo.id;
               }
               state.entities[todo.id] = todo;
             });

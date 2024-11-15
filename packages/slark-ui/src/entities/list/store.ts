@@ -1,17 +1,18 @@
 import { create } from "zustand";
 import { shallow } from "zustand/shallow";
-import { Draft, produce } from "immer";
+import { Draft, produce, enablePatches } from "immer";
 import { ListEntity } from "./type";
 import { TodoContainer } from "./constants";
 import { update, create as createTodo, remove } from "./request";
 import { getPageState } from "../page/store";
 
+enablePatches();
 interface TodoStore {
   entities: Record<string, ListEntity>;
   focusNode: string;
 }
 
-const useStore = create<TodoStore>(() => ({
+export const useStore = create<TodoStore>(() => ({
   entities: {
     [TodoContainer]: {
       id: TodoContainer,
