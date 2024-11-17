@@ -1,0 +1,14 @@
+{
+  "name": "@slark/web-builder",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "mini-css-extract-plugin": "^2.9.2",
+    "webpack-merge": "^6.0.1"
+  }
+}
