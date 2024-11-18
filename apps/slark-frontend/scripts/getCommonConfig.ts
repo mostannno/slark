@@ -1,17 +1,19 @@
-const MiniCssExtraPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+import path from "path";
+import { Configuration } from "webpack";
+import MiniCssExtraPlugin from "mini-css-extract-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { rootPath } from "./context";
 
-function getCommonConfig() {
+function getCommonConfig(): Configuration {
   return {
     entry: "src/main",
     resolve: {
       extensions: [".ts", ".js", ".jsx", ".tsx"],
       alias: {
-        widgets: path.resolve(__dirname, "../src/widgets/"),
-        assets: path.resolve(__dirname, "../src/assets/"),
-        shared: path.resolve(__dirname, "../src/shared/"),
-        entities: path.resolve(__dirname, "../src/entities/"),
+        widgets: path.resolve(rootPath, "./src/widgets/"),
+        assets: path.resolve(rootPath, "./src/assets/"),
+        shared: path.resolve(rootPath, "./src/shared/"),
+        entities: path.resolve(rootPath, "./src/entities/"),
       },
     },
     module: {
@@ -55,4 +57,4 @@ function getCommonConfig() {
   };
 }
 
-module.exports = getCommonConfig;
+export default getCommonConfig;
