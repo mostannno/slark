@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res } from "@nestjs/common";
 import { NextService } from "../next/next.service";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 @Controller()
 export class AppController {

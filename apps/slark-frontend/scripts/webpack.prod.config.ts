@@ -9,6 +9,7 @@ const getProdConfig = () => {
   const prodConfig: Configuration = {
     entry: path.resolve(rootPath, "./src/main"),
     mode: "production",
+    devtool: 'source-map',
     output: {
       path: path.resolve(rootPath, "./dist"),
       filename: "[name]-[contenthash].js",

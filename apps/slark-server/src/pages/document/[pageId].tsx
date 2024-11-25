@@ -46,7 +46,7 @@ const Index: React.FC<{
   page: PageInterface;
   todos: TodoInterface[];
 }> = ({ page, todos }) => {
-  const sortedTodos = buildTodo(todos);
+  const sortedTodos = buildTodo(todos as any);
   const todoEntities = {
     [TodoContainer]: {
       id: TodoContainer,
@@ -65,8 +65,8 @@ const Index: React.FC<{
   });
   initListStore(todoEntities);
   initPageStore({
-    currentPageId: page.id,
-    pages: [page],
+    currentPageId: `${page.id}`,
+    pages: [page].map((v) => ({ ...v, id: `${v.id}` })),
   });
   console.log(useStore.getState());
   return (

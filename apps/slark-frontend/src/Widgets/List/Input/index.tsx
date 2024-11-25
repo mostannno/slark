@@ -117,6 +117,11 @@ export function Input(props: ItemProps) {
             prevSibling.next = node.next || null;
             state.focusNode = prevSibling.id;
           }
+          if (node.is_root) {
+            if (node.next) {
+              state.entities[node.next]!.is_root = true;
+            }
+          }
           delete state.entities[node.id];
         });
       }

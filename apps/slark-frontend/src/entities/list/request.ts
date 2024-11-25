@@ -66,7 +66,7 @@ export async function update(updates: ListEntity[] | string[]) {
 }
 
 export async function create(entity: ListEntity) {
-  const { id, pageId, ...rest } = entity;
+  const { id, pageId, ...rest } = updateRealId([entity])[0]!;
   const result = await jsonPost<ListEntity>("/todo/create", {
     ...rest,
     page_id: pageId,

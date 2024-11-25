@@ -21,10 +21,11 @@ function getCommonConfig(): Configuration {
         {
           test: /\.css$/,
           use: [MiniCssExtraPlugin.loader, "css-loader"],
+          exclude: /(node_modules)/,
         },
         {
           test: /\.(t|j)sx?$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /(node_modules)/,
           use: {
             loader: "babel-loader",
             options: {
@@ -33,7 +34,10 @@ function getCommonConfig(): Configuration {
                 "@babel/preset-typescript",
                 "@babel/preset-react",
               ],
-              plugins: ["@babel/plugin-proposal-object-rest-spread"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                ["@babel/plugin-transform-react-jsx", { runtime: "automatic" }],
+              ],
             },
           },
         },
@@ -43,7 +47,7 @@ function getCommonConfig(): Configuration {
       new HtmlWebpackPlugin({
         title: "Slark",
         template: "index.html",
-        filename: "slark.html",
+        filename: "index.html",
         minify: {
           removeComments: true,
           collapseWhitespace: true,

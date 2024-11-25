@@ -39,7 +39,7 @@ async function applyAddPatches(patches: ListEntity) {
     pageId: currentPageId!,
   });
 
-  if (!("error" in result)) {
+  if (id && !("error" in result)) {
     updateStore((updateState) => {
       updateState.entities[id]!.real_id = result.id;
     });
@@ -107,9 +107,8 @@ export const updateStore = (
         // 更新 title 时会更新整个 object
         if (!prop) {
           updateEntities.push({ ...value });
-        } else if (prop === "next" || prop === "child") {
+        } else if (prop === "next" || prop === "child" || prop === 'is_root') {
           updateIds.push(state[target][key]!.id);
-          // test[]
         }
         return;
       }
