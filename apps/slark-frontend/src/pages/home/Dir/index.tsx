@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import useCommonStore from "entities/page/store";
 
 const Container = styled.div`
+  flex-shrink: 0;
   width: 280px;
   height: 100%;
   padding: 20px;

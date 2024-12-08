@@ -10,6 +10,7 @@ import {
   ListEntity,
   TodoContainer,
 } from "entities/list";
+import { Container, Prefix } from "./style";
 
 export interface ItemProps {
   node: ListEntity & { isFocusing: boolean };
@@ -17,14 +18,7 @@ export interface ItemProps {
   handleTab: (withShift: boolean) => void;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 20px;
-`;
-
-const StyledInput = styled.input`
+const StyledInput = styled.div`
   font-size: 16px;
   display: flex;
   margin-left: 5px;
@@ -34,13 +28,6 @@ const StyledInput = styled.input`
   color: #16181a;
 
   -webkit-font-smoothing: antialiased;
-`;
-
-const Prefix = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #5a5a5a;
 `;
 
 const Command = {
@@ -152,10 +139,10 @@ export function Input(props: ItemProps) {
   };
 
   useEffect(() => {
-    if (node?.isFocusing && inputRef.current) {
+    if (node.isFocusing && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [node?.isFocusing]);
+  }, [node.isFocusing]);
 
   const tip = (
     <>
@@ -173,14 +160,16 @@ export function Input(props: ItemProps) {
       <Container>
         <Prefix />
         <StyledInput
+          contentEditable
           ref={inputRef}
           onChange={handleChange}
-          value={node?.title}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          autoFocus={!!node?.isFocusing}
+          autoFocus={!!node.isFocusing}
           onKeyDown={onKeyDown}
-        />
+        >
+          {node.title}
+        </StyledInput>
       </Container>
     </Tooltip>
   );

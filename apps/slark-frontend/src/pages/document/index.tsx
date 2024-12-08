@@ -16,6 +16,7 @@ const ListContainer = styled.div`
 
 const ListTitle = styled.h1`
   margin-left: 40px;
+  margin-bottom: 40px;
   font-weight: 500;
   cursor: default;
 `;
@@ -51,7 +52,7 @@ function Document() {
   return (
     <ListContainer>
       {page && <ListTitle>{page.title}</ListTitle>}
-      <List isContainer id={TodoContainer} />
+      <List id={TodoContainer} />
     </ListContainer>
   );
 }
